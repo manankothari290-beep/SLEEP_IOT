@@ -1,0 +1,14 @@
+{
+    "name": "sleepguard-simulator",
+    "version": "1.0.0",
+    "description": "IoT simulator for SleepGuard - simulates ESP32 sleep monitoring device",
+    "main": "simulator.js",
+    "type": "module",
+    "scripts": {
+        "start": "node simulator.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "node-fetch": "^3.3.2"
+    }
+}
