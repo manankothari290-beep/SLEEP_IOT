@@ -24,12 +24,12 @@ export default function HumidityChart({ history }) {
             {
                 label: 'Humidity',
                 data: values,
-                borderColor: '#818cf8',
-                backgroundColor: 'rgba(129, 140, 248, 0.07)',
+                borderColor: '#86868B',
+                backgroundColor: 'rgba(134, 134, 139, 0.04)',
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: '#818cf8',
+                pointBackgroundColor: '#86868B',
                 borderWidth: 2,
             },
         ],
@@ -41,24 +41,28 @@ export default function HumidityChart({ history }) {
         plugins: {
             legend: { display: false },
             tooltip: {
-                backgroundColor: 'rgba(10, 22, 40, 0.9)',
-                titleColor: '#94a3b8',
-                bodyColor: '#e2e8f0',
-                borderColor: 'rgba(129, 140, 248, 0.2)',
+                backgroundColor: '#FFFFFF',
+                titleColor: '#86868B',
+                bodyColor: '#1D1D1F',
+                borderColor: '#E5E5E7',
                 borderWidth: 1,
+                cornerRadius: 8,
+                padding: 10,
                 callbacks: { label: (ctx) => `${ctx.parsed.y}%` },
             },
         },
         scales: {
             x: {
-                grid: { color: 'rgba(255,255,255,0.04)' },
-                ticks: { color: '#475569', maxTicksLimit: 8, font: { size: 11 } },
+                grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+                ticks: { color: '#AEAEB2', maxTicksLimit: 8, font: { size: 10 } },
+                border: { display: false },
             },
             y: {
                 min: 20,
                 max: 90,
-                grid: { color: 'rgba(255,255,255,0.04)' },
-                ticks: { color: '#475569', font: { size: 11 }, callback: (v) => `${v}%` },
+                grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+                ticks: { color: '#AEAEB2', font: { size: 10 }, callback: (v) => `${v}%` },
+                border: { display: false },
             },
         },
         animation: { duration: 300 },
@@ -67,9 +71,11 @@ export default function HumidityChart({ history }) {
     return (
         <div className="glass-card p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2">
-                <span className="text-lg">💧</span>
-                <h4 className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>
-                    Humidity <span style={{ color: 'var(--text-muted)' }}>(%)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                </svg>
+                <h4 className="font-semibold text-sm" style={{ color: '#1D1D1F' }}>
+                    Humidity <span style={{ color: '#86868B', fontWeight: 400 }}>(%)</span>
                 </h4>
             </div>
             <div style={{ height: '180px' }}>

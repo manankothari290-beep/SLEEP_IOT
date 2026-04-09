@@ -1,10 +1,10 @@
 import React from 'react'
 
 const STATUS_COLORS = {
-    normal: { bg: 'rgba(74, 222, 128, 0.1)', border: 'rgba(74, 222, 128, 0.25)', text: '#4ade80', glow: 'rgba(74, 222, 128, 0.4)' },
-    warning: { bg: 'rgba(251, 191, 36, 0.1)', border: 'rgba(251, 191, 36, 0.25)', text: '#fbbf24', glow: 'rgba(251, 191, 36, 0.4)' },
-    critical: { bg: 'rgba(248, 113, 113, 0.1)', border: 'rgba(248, 113, 113, 0.25)', text: '#f87171', glow: 'rgba(248, 113, 113, 0.4)' },
-    neutral: { bg: 'rgba(56, 189, 248, 0.08)', border: 'rgba(56, 189, 248, 0.15)', text: '#38bdf8', glow: 'rgba(56, 189, 248, 0.3)' },
+    normal: { bg: 'rgba(52, 199, 89, 0.06)', border: 'rgba(52, 199, 89, 0.15)', text: '#34C759', glow: 'rgba(52, 199, 89, 0.3)' },
+    warning: { bg: 'rgba(255, 159, 10, 0.06)', border: 'rgba(255, 159, 10, 0.15)', text: '#FF9F0A', glow: 'rgba(255, 159, 10, 0.3)' },
+    critical: { bg: 'rgba(255, 59, 48, 0.06)', border: 'rgba(255, 59, 48, 0.15)', text: '#FF3B30', glow: 'rgba(255, 59, 48, 0.3)' },
+    neutral: { bg: 'rgba(142, 142, 147, 0.06)', border: 'rgba(142, 142, 147, 0.12)', text: '#8E8E93', glow: 'rgba(142, 142, 147, 0.2)' },
 }
 
 function getStatus(type, value) {
@@ -48,44 +48,37 @@ export default function SensorCard({ icon, label, value, unit, type, rawValue })
     return (
         <div
             style={{
-                background: 'rgba(13, 26, 50, 0.6)',
-                border: `1px solid ${hasData ? colors.border : 'rgba(56, 189, 248, 0.08)'}`,
+                background: '#FFFFFF',
+                border: '1px solid #E5E5E7',
                 borderRadius: '16px',
                 padding: '20px',
-                backdropFilter: 'blur(12px)',
-                transition: 'all 0.3s ease',
+                transition: 'all 0.25s ease',
                 position: 'relative',
-                overflow: 'hidden',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)',
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)'
+                e.currentTarget.style.borderColor = '#D1D1D6'
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.04)'
+                e.currentTarget.style.borderColor = '#E5E5E7'
             }}
         >
-            {/* Subtle top accent line */}
-            {hasData && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: '20%',
-                        right: '20%',
-                        height: '2px',
-                        background: `linear-gradient(90deg, transparent, ${colors.text}, transparent)`,
-                        opacity: 0.6,
-                    }}
-                />
-            )}
-
             {/* Icon + Status dot */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
                 <div
                     style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '12px',
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '10px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '20px',
-                        background: hasData ? colors.bg : 'rgba(255,255,255,0.03)',
-                        border: `1px solid ${hasData ? colors.border : 'rgba(255,255,255,0.05)'}`,
+                        fontSize: '18px',
+                        background: hasData ? colors.bg : '#F5F5F7',
+                        border: `1px solid ${hasData ? colors.border : '#E5E5E7'}`,
+                        color: hasData ? colors.text : '#86868B',
                     }}
                 >
                     {icon}
@@ -95,8 +88,8 @@ export default function SensorCard({ icon, label, value, unit, type, rawValue })
                         width: '8px',
                         height: '8px',
                         borderRadius: '50%',
-                        backgroundColor: hasData ? colors.text : '#334155',
-                        boxShadow: hasData ? `0 0 8px ${colors.glow}` : 'none',
+                        backgroundColor: hasData ? colors.text : '#D1D1D6',
+                        boxShadow: hasData ? `0 0 6px ${colors.glow}` : 'none',
                         animation: hasData ? 'pulse-live 2s infinite' : 'none',
                     }}
                 />
@@ -105,34 +98,35 @@ export default function SensorCard({ icon, label, value, unit, type, rawValue })
             {/* Label */}
             <p
                 style={{
-                    fontSize: '11px',
-                    fontWeight: 700,
+                    fontSize: '12px',
+                    fontWeight: 600,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    color: '#475569',
-                    marginBottom: '8px',
+                    letterSpacing: '0.06em',
+                    color: '#86868B',
+                    marginBottom: '6px',
                 }}
             >
                 {label}
             </p>
 
             {/* Value */}
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px' }}>
                 <span
                     key={String(value)}
                     style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        fontSize: hasData ? '28px' : '24px',
+                        fontFamily: "'JetBrains Mono', 'SF Mono', monospace",
+                        fontSize: hasData ? '26px' : '22px',
                         fontWeight: 700,
-                        color: hasData ? colors.text : '#1e293b',
+                        color: hasData ? '#1D1D1F' : '#D1D1D6',
                         animation: hasData ? 'count-up 0.3s ease-out' : 'none',
                         lineHeight: 1,
+                        letterSpacing: '-0.02em',
                     }}
                 >
                     {displayValue}
                 </span>
                 {unit && (
-                    <span style={{ fontSize: '13px', color: '#475569', fontWeight: 500 }}>
+                    <span style={{ fontSize: '13px', color: '#86868B', fontWeight: 500 }}>
                         {unit}
                     </span>
                 )}

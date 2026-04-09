@@ -20,23 +20,30 @@ const CHART_OPTIONS = {
     plugins: {
         legend: { display: false },
         tooltip: {
-            backgroundColor: 'rgba(10, 22, 40, 0.9)',
-            titleColor: '#94a3b8',
-            bodyColor: '#e2e8f0',
-            borderColor: 'rgba(56, 189, 248, 0.2)',
+            backgroundColor: '#FFFFFF',
+            titleColor: '#86868B',
+            bodyColor: '#1D1D1F',
+            borderColor: '#E5E5E7',
             borderWidth: 1,
+            cornerRadius: 8,
+            padding: 10,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+            titleFont: { size: 11 },
+            bodyFont: { size: 12, weight: 600 },
         },
     },
     scales: {
         x: {
-            grid: { color: 'rgba(255,255,255,0.04)' },
-            ticks: { color: '#475569', maxTicksLimit: 8, font: { size: 11 } },
+            grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+            ticks: { color: '#AEAEB2', maxTicksLimit: 8, font: { size: 10 } },
+            border: { display: false },
         },
         y: {
             min: 40,
             max: 110,
-            grid: { color: 'rgba(255,255,255,0.04)' },
-            ticks: { color: '#475569', font: { size: 11 } },
+            grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+            ticks: { color: '#AEAEB2', font: { size: 10 } },
+            border: { display: false },
         },
     },
     animation: { duration: 300 },
@@ -53,12 +60,12 @@ export default function HeartRateChart({ history }) {
             {
                 label: 'Heart Rate',
                 data: values,
-                borderColor: '#f87171',
-                backgroundColor: 'rgba(248, 113, 113, 0.08)',
+                borderColor: '#FF3B30',
+                backgroundColor: 'rgba(255, 59, 48, 0.04)',
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: '#f87171',
+                pointBackgroundColor: '#FF3B30',
                 borderWidth: 2,
             },
         ],
@@ -67,9 +74,11 @@ export default function HeartRateChart({ history }) {
     return (
         <div className="glass-card p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2">
-                <span className="text-lg">❤️</span>
-                <h4 className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>
-                    Heart Rate <span style={{ color: 'var(--text-muted)' }}>(BPM)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF3B30" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <h4 className="font-semibold text-sm" style={{ color: '#1D1D1F' }}>
+                    Heart Rate <span style={{ color: '#86868B', fontWeight: 400 }}>(BPM)</span>
                 </h4>
             </div>
             <div style={{ height: '180px' }}>
