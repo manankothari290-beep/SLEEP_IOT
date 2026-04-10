@@ -6,8 +6,8 @@ import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const SUPABASE_URL = process.env.SUPABASE_URL
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY
 const INTERVAL_MS = 5000 // Send data every 5 seconds
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
@@ -78,7 +78,7 @@ async function sendToSupabase(payload) {
             'Content-Type': 'application/json',
             apikey: SUPABASE_ANON_KEY,
             Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            Prefer: 'return=minimal',
+            Prefer: 'return=representation',
         },
         body: JSON.stringify(payload),
     })
@@ -86,6 +86,11 @@ async function sendToSupabase(payload) {
     if (!response.ok) {
         const errorText = await response.text()
         throw new Error(`Supabase error ${response.status}: ${errorText}`)
+    }
+    
+    const data = await response.json()
+    if (data.length === 0) {
+        throw new Error('Supabase returned 201 but inserted 0 rows. This is likely an RLS (Row Level Security) policy issue on the sensor_data table.')
     }
 }
 

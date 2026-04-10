@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import ManualInputPanel from './ManualInputPanel'
 import { useSensorData } from '../hooks/useSensorData'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card'
 import {
@@ -130,6 +131,9 @@ export default function Dashboard() {
                     Real-time telemetry and environmental analysis for optimized recovery.
                 </p>
             </div>
+
+            {/* ── Manual Input Panel ─────────────────── */}
+            <ManualInputPanel />
 
             {/* ── First Row of Metrics ─────────────────── */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
